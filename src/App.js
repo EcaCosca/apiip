@@ -14,14 +14,14 @@ function App() {
           `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_IPIFY_KEY}`
         )
         .then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
           setUserIP(response.data.ip);
           setUserLocation(response.data.location);
         })
         .catch((error) => console.log(error));
     };
     fetchIP();
-    console.log(userIP)
+    // console.log(userIP)
     console.log(userLocation)
   }, []);
 
@@ -30,19 +30,21 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          {userIP}
+        Your location is: {userIP}
         </p>
         <p>
-          {/* {userLocation.city} */}
+        {userLocation ? (
+          <>
+            <h3>Your location is: {userLocation.city}</h3>
+            <h3>Your region is: {userLocation.region}</h3>
+            <h3>Your country is: {userLocation.country}</h3>
+            <h3>Your latitude is: {userLocation.lat}</h3>
+            <h3>Your longitude is: {userLocation.lng}</h3>
+          </>
+        ) : (
+          "Loading..."
+        )}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
