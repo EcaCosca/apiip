@@ -8,7 +8,7 @@ export default function MyMap(props) {
   useEffect(() => {
     setCenter([props.props.lat, props.props.lng])
   }, [])
-
+  console.log(center)
   return (
     <Map 
       height={300}

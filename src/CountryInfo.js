@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { DateTime } from "luxon";
 
 const CountryInfo = ({ userCountry }) => {
   const [countryInfo, setCountryInfo] = useState();
-  console.log(userCountry)
+  const [date, setDate] = useState(DateTime.now().c)
+  const [dateGermany, setDateGermany] = useState(DateTime.local().setZone("Europe/Berlin"))
+  console.log(dateGermany)
 
   useEffect(() => {
     const fetchCountryInfo = async () => {
@@ -13,7 +16,10 @@ const CountryInfo = ({ userCountry }) => {
         .catch((error) => console.log(error));
     };
     fetchCountryInfo();
+    setInterval(setDate(DateTime.now().c), 1000)
   }, [userCountry]);
+
+
   return (
     <div>
       {countryInfo ? (
@@ -22,6 +28,19 @@ const CountryInfo = ({ userCountry }) => {
             The country you are located in is{" "}
             {countryInfo.altSpellings[1]}.
           </p>
+          <p>
+            Current date:
+            {date.day+"/"+date.month+"/"+date.year}
+          </p>
+          <p>
+            Current time: 
+            {date.hour+":"+date.minute+":"+date.second}
+          </p>
+          <p>
+            Current Berlin time: 
+            {dateGermany.hour+":"+dateGermany.minute+":"+dateGermany.second}
+          </p>
+          
           <p>
             {countryInfo.population
               .toString()

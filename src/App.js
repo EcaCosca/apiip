@@ -25,22 +25,17 @@ function App() {
           `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_IPIFY_KEY}`
         )
         .then((response) => {
-          // console.log(response.data)
           setUserIP(response.data.ip);
           setUserLocation(response.data.location);
-          // console.log(response.data.location)
         })
         .catch((error) => console.log(error));
     };
     fetchIP();
-    // console.log(userIP)
-    // console.log(userLocation)
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <p>
         Your IP is: {userIP}
         </p>
