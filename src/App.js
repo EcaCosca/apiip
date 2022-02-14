@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 import {useEffect, useState} from 'react'
 import MyMap from './MyMap';
+import CountryInfo from './CountryInfo';
 
 function App() {
   const [userIP, setUserIP] = useState();
@@ -39,7 +40,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <p>
         Your IP is: {userIP}
         </p>
@@ -60,6 +61,7 @@ function App() {
         </p>
 
         <MyMap props={userLocation}/>
+        <CountryInfo  userCountry={userLocation.country}/>
       </header>
     </div>
   );
